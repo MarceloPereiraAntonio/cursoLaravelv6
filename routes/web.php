@@ -1,5 +1,18 @@
 <?php
 
+Route::resource('products', 'ProductController');
+
+/*
+Route::delete('/products/{id}', 'ProductController@delete')->name('products.delete');
+Route::put('/products/{id}', 'ProductController@update')->name('products.update');
+Route::get('/products/create', 'ProductController@create')->name('products.create');
+Route::get('/products/{id}/edita', 'ProductController@edita')->name('products.edita');
+Route::get('/products/{id}', 'ProductController@show')->name('products.show');
+Route::get('/products', 'ProductController@index')->name('products.index');
+Route::post('/products/store', 'ProductController@store')->name('products.store');
+*/
+
+
 Route::get('/login', function(){
     return 'Login';
 })->name('login');
