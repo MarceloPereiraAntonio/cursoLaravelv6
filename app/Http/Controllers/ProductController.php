@@ -22,7 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         $products = ['tv', 'geladeria', 'fogao', 'video game'];
+        
 
         return view('admin.pages.products.index', compact('products'));
     }
