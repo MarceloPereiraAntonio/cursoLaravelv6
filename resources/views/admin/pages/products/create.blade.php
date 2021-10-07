@@ -7,7 +7,14 @@
 
 <h1>Criando produto</h1>
 
-    <input type="text" name="name" placeholder="Nome:">
+    @if($errors->any())
+    <ul>
+        @foreach($errors->all() as $erro)
+            <li>{{ $erro }}</li>
+        @endforeach
+    </ul>
+    @endif
+    <input type="text" name="name" placeholder="Nome:" >
 <form action="{{ route('products.store') }}" method="post"  enctype="multipart/form-data" >
     
     @csrf
