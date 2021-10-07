@@ -9,11 +9,11 @@ class ProductController extends Controller
     protected $request;
     public function __construct(Request $request){
         
-        $this->request = $request;
+        /*$this->request = $request;
         $this->middleware('auth')->except(
             [
-                'index', 'show'
-            ]);
+                'index', 'show', 'create'
+            ]);*/
     }
     /**
      * Display a listing of the resource.
@@ -37,6 +37,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('admin.pages.products.create');
     }
 
     /**
@@ -47,7 +48,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->file('photo')->isValid()){
+            dd($request->file('photo')->store('products'));
+        }
+        
     }
 
     /**

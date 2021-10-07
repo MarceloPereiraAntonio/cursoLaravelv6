@@ -7,6 +7,7 @@
 
 
 <h1>Exibindo produtos</h1>
+<a href="{{ route('products.create')}}">Adicionar novo produto </a>
 
 @include ('admin.includes.alerts', ['content' => 'Outro alerta'])  {{--Include blade--}}
 
