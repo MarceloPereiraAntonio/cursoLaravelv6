@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorageUpdateProductRequest;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 
@@ -25,10 +26,12 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = ['tv', 'geladeria', 'fogao', 'video game'];
+        $products = Product::paginate(10);
         
 
-        return view('admin.pages.products.index', compact('products'));
+        return view('admin.pages.products.index', [
+            'products'=>$products,
+        ]);
     }
 
     /**
@@ -50,18 +53,6 @@ class ProductController extends Controller
      */
     public function store(StorageUpdateProductRequest $request)
     {
-        /* $request->validate([
-            'nome'=>'required|min:3|max:255',
-            'description'=>'nullable|max:10000',
-            'photo'=>'image|required',
-        ]);
-        8
-        */
-        dd('OK');
-
-        if ($request->file('photo')->isValid()){
-            dd($request->file('photo')->store('products'));
-        }
         
     }
 
@@ -73,7 +64,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+       $product = Product::find($id);
+      
+       return view('admin.pages.products.show', [
+           'product' => $product
+       ]);
     }
 
     /**

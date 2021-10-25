@@ -25,15 +25,17 @@ class StorageUpdateProductRequest extends FormRequest
     {
         return [
                 'name'=>'required|min:3|max:255',
-                'description'=>'nullable|max:10000',
-                'photo'=>'image|required',
+                'description'=>'required|max:10000',
+                'valor'=>'required',
+                'photo'=>'nullable|image|',
         ];
     }
     public function messages()
     {
         return[
             'name.required'=>'Nome é obrigatorio',
-            'photo.required' =>'Ops! insira uma imagem valida!',
+            'description.required' =>'Ops! insira uma descrição para o seu produto!',
+            'valor.required'=>'Insira um valor para o seu produto!',
         ];
     }
 }
