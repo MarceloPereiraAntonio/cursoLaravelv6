@@ -13,6 +13,7 @@
             <th>nome</th>
             <th>valor</th>
             <th width="100">descrição</th>
+            <th width="100">Editar</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
             <td>{{$product->name}}</td>
             <td>{{$product->valor}}</td>
             <td><a href="{{route('products.show', $product->id )}}">detalhes</a>
+            <td><a class="btn btn-warning" href="{{route('products.edit', $product->id)}}">Editar</a>
             </td>
         </tr>
         @endforeach

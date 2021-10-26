@@ -30,6 +30,7 @@
 
     <div class="form-group mb-3">
     <button type="submit" class="btn btn-primary " >Cadastrar </button>
+    <a class="btn btn-primary"  href="{{ route('products.index')}}">voltar</a>
     </div>
 
 

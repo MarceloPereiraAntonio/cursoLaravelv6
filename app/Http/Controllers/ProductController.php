@@ -53,7 +53,10 @@ class ProductController extends Controller
      */
     public function store(StorageUpdateProductRequest $request)
     {
-        
+        $date = $request->only('name', 'valor', 'description');
+
+        Product::create($date);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -79,7 +82,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+      
+       return view('admin.pages.products.edit', [
+           'product' => $product
+       ]);
+    
     }
 
     /**
@@ -91,7 +99,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!$product = Product::find($id))
+        return redirect()->back();
+        $product->update($request->all());
+        return redirect()->route('products.index');
     }
 
     /**
@@ -102,6 +113,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!$product = Product::find($id))
+        return redirect()->back();
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
