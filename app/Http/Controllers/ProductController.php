@@ -10,13 +10,11 @@ use Illuminate\Session\Store;
 class ProductController extends Controller
 {
     protected $request;
-    public function __construct(Request $request){
+    private $repository;
+    public function __construct(Request $request, Product $product){
         
-        /*$this->request = $request;
-        $this->middleware('auth')->except(
-            [
-                'index', 'show', 'create'
-            ]);*/
+        $this->request = $request;
+        $this->repository = $product;
     }
     /**
      * Display a listing of the resource.
@@ -55,7 +53,7 @@ class ProductController extends Controller
     {
         $date = $request->only('name', 'valor', 'description');
 
-        Product::create($date);
+        $this->repository->create($date);
         return redirect()->route('products.index');
     }
 
@@ -93,13 +91,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorageUpdateProductRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorageUpdateProductRequest $request, $id)
     {
-        if(!$product = Product::find($id))
+        if(!$product = $this->repository->find($id))
         return redirect()->back();
         $product->update($request->all());
         return redirect()->route('products.index');
@@ -113,9 +111,19 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        if(!$product = Product::find($id))
+        if(!$product = $this->repository->find($id))
         return redirect()->back();
         $product->delete();
         return redirect()->route('products.index');
+    }
+
+    public function search(Request $request)
+    {
+        $filters = $request->except('_token');
+        $products = $this->repository->search($request->filter);
+        return view('admin.pages.products.index', [
+            'products'=>$products,
+            'filters'=>$filters,
+        ]);
     }
 }

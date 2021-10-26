@@ -6,7 +6,16 @@
 <a href="{{ route('products.create')}}" class="btn btn-primary">Adicionar novo produto </a>
 
 
-<br><br>
+<form action="{{route('products.search')}}" method="POST">
+    @csrf
+    <input type="text" name="filter" placeholder="filtrar" class="form-control" style="width:200px; float: right;" value="{{$filters['filter']}}">
+
+    
+    <button type="submit" class="btn btn-secondary" style="float: right">Pesquisar</button>
+    </form>
+
+
+<br>
 <table  class="table table-striped">
     <thead>
         <tr>
@@ -29,7 +38,13 @@
     </tbody>
   
 </table>
+ @if (isset($filters))
+ {!! $products->appends($filters)->links() !!}
+    
+@else
 {!! $products->links() !!}
+@endif
+
 
 
 

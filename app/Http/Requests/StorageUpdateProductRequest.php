@@ -24,7 +24,7 @@ class StorageUpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-                'name'=>'required|min:3|max:255',
+                'name'=>'required|min:3|max:255|unique:products',
                 'description'=>'required|max:10000',
                 'valor'=>'required',
                 'photo'=>'nullable|image|',
@@ -34,6 +34,7 @@ class StorageUpdateProductRequest extends FormRequest
     {
         return[
             'name.required'=>'Nome é obrigatorio',
+            'name.unique'=>'Esse produto já existe',
             'description.required' =>'Ops! insira uma descrição para o seu produto!',
             'valor.required'=>'Insira um valor para o seu produto!',
         ];

@@ -1,5 +1,5 @@
 <?php
-
+Route::any('products/search', 'ProductController@search')->name('products.search');
 Route::resource('products', 'ProductController');
 
 /*
