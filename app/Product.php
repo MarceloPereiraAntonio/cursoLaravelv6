@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $fillable = ['name', 'valor', 'description'];
 
-    public function search($filter)
+    public function search($filter = null)
     {
         $results = $this->where(function($query) use($filter){
             if($filter)

@@ -8,7 +8,7 @@
 
 <form action="{{route('products.search')}}" method="POST">
     @csrf
-    <input type="text" name="filter" placeholder="filtrar" class="form-control" style="width:200px; float: right;" value="{{$filters['filter']}}">
+    <input type="text" name="filter" placeholder="filtrar" class="form-control" style="width:200px; float: right;" value="{{$filters['filter'] ?? ''}}">
 
     
     <button type="submit" class="btn btn-secondary" style="float: right">Pesquisar</button>

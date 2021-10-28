@@ -1,6 +1,6 @@
 <?php
-'Route'::any('products/search', 'ProductController@search')->name('products.search');
-'Route'::resource('products', 'ProductController');
+'Route'::any('products/search', 'ProductController@search')->name('products.search')->middleware('auth');
+'Route'::resource('products', 'ProductController')->middleware('auth');;
 
 /*
 'Route'::delete('/products/{id}', 'ProductController@delete')->name('products.delete');
@@ -108,3 +108,7 @@
 
     return view('welcome', compact('helloWord'));
 });
+
+'Auth'::routes();
+
+'Route'::get('/home', 'HomeController@index')->name('home');
